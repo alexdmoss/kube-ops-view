@@ -36,3 +36,8 @@ It should then be available via https://$APP_HOSTNAME/, or you can `kubectl prox
 https://$APP_HOSTNAME/#scale=2.0 makes it slightly easier to read.
 
 The search bar at the top can be used to filter by name, namespace, and label.
+
+## To Do
+
+- [ ] CI
+- [ ] Some smoke tests

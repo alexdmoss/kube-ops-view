@@ -1,5 +1,14 @@
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-conf
+data:
+  redis-config: |
+    maxmemory 2mb
+    maxmemory-policy allkeys-lru
+---
+apiVersion: v1
 kind: Service
 metadata:
   labels:
@@ -35,6 +44,12 @@ spec:
       containers:
       - name: redis
         image: redis:5-alpine
+        command:
+          - redis-server
+          - "/redis-master/redis.conf"
+        env:
+          - name: MASTER
+            value: "true"
         ports:
         - containerPort: 6379
           protocol: TCP
@@ -43,13 +58,27 @@ spec:
             port: 6379
         resources:
           limits:
-            cpu: 200m
+            cpu: 100m
             memory: 100Mi
           requests:
             cpu: 50m
             memory: 50Mi
+        volumeMounts:
+          - mountPath: /redis-master-data
+            name: data
+          - mountPath: /redis-master
+            name: config
         securityContext:
           readOnlyRootFilesystem: true
           runAsNonRoot: true
           # we need to use the "redis" uid
           runAsUser: 100
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: config
+          configMap:
+            name: redis-conf
+            items:
+              - key: redis-config
+                path: redis.conf
