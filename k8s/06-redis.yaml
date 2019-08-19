@@ -5,7 +5,7 @@ metadata:
   name: redis-conf
 data:
   redis-config: |
-    maxmemory 2mb
+    tcp-backlog 128
     maxmemory-policy allkeys-lru
 ---
 apiVersion: v1
