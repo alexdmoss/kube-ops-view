@@ -41,6 +41,14 @@ spec:
         application: kube-ops-view-redis
         version: v0.0.1
     spec:
+      # NB: this affects all pods on the host where redis starts up
+      initContainers:
+      - name: init-redis
+        image: busybox
+        volumeMounts:
+        - name: host-sys
+          mountPath: /host-sys
+        command: ['sh', '-c', 'echo never > /host-sys/kernel/mm/transparent_hugepage/enabled']
       containers:
       - name: redis
         image: redis:5-alpine
@@ -82,3 +90,6 @@ spec:
             items:
               - key: redis-config
                 path: redis.conf
+        - name: host-sys
+          hostPath:
+            path: /sys
