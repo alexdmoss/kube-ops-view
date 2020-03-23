@@ -22,7 +22,7 @@ metadata:
   name: redis
 spec:
   selector:
-    tier: redis
+    service: redis
   type: ClusterIP
   ports:
     - port: 6379
