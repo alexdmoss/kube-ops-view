@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-conf
+data:
+  redis-config: |
+    tcp-backlog 128
+    maxmemory-policy allkeys-lru
