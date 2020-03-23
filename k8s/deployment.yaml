@@ -24,7 +24,7 @@ spec:
           image: hjacobs/kube-ops-view:0.11
           args:
             # remove this option to use built-in memory store
-            - --redis-url=redis://kube-ops-view-redis:6379
+            - --redis-url=redis://redis:6379
           ports:
             - containerPort: 8080
               protocol: TCP
