@@ -2,22 +2,23 @@
 kind: pipeline
 name: kube-ops-view
 
-- name: deploy
-  image: mosstech/drone-gke-deployer:latest
-  environment:
-    GCP_PROJECT_ID: moss-work
-    HOSTNAME:
-      from_secret: KOV_HOSTNAME
-    USERNAME:
-      from_secret: KOV_USERNAME
-    PASSWORD:
-      from_secret: KOV_PASSWORD
-    K8S_DEPLOYER_CREDS:
-      from_secret: MW_K8S_DEPLOYER
-    K8S_CLUSTER_NAME:
-      from_secret: MW_K8S_CLUSTER_NAME
-  commands:
-  - ./deploy.sh
-  when:
-    event: push
-    branch: master
+steps:
+  - name: deploy
+    image: mosstech/drone-gke-deployer:latest
+    environment:
+      GCP_PROJECT_ID: moss-work
+      HOSTNAME:
+        from_secret: KOV_HOSTNAME
+      USERNAME:
+        from_secret: KOV_USERNAME
+      PASSWORD:
+        from_secret: KOV_PASSWORD
+      K8S_DEPLOYER_CREDS:
+        from_secret: MW_K8S_DEPLOYER
+      K8S_CLUSTER_NAME:
+        from_secret: MW_K8S_CLUSTER_NAME
+    commands:
+      - ./deploy.sh
+    when:
+      event: push
+      branch: master
