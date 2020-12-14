@@ -16,19 +16,6 @@ spec:
         service: redis
     spec:
       priorityClassName: high-priority
-      # NB: this affects all pods on the host where redis starts up
-      initContainers:
-        - name: init-redis
-          image: busybox
-          volumeMounts:
-            - name: host-sys
-              mountPath: /host-sys
-          command:
-            [
-              "sh",
-              "-c",
-              "echo never > /host-sys/kernel/mm/transparent_hugepage/enabled",
-            ]
       containers:
         - name: redis
           image: redis:5-alpine
