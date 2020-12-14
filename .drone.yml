@@ -6,7 +6,8 @@ steps:
   - name: deploy
     image: mosstech/drone-gke-deployer:latest
     environment:
-      GCP_PROJECT_ID: moss-work
+      GCP_PROJECT_ID: 
+        from_secret: MW_GCP_PROJECT
       HOSTNAME:
         from_secret: KOV_HOSTNAME
       USERNAME:
