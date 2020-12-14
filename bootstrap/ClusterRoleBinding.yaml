@@ -10,4 +10,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: kube-ops-view
-  namespace: mw-platform
+  namespace: ops-view

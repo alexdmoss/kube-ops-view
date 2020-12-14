@@ -26,7 +26,7 @@ function deploy() {
 
   _console_msg "Applying Kubernetes yaml"
   kustomize build . | envsubst | kubectl apply -f -
-  kubectl rollout status deploy/kube-ops-view -n=mw-platform
+  kubectl rollout status deploy/kube-ops-view -n=ops-view
   
   popd >/dev/null
 

@@ -20,7 +20,16 @@ Note that OAuth login is supported: https://github.com/hjacobs/kube-ops-view/blo
 
 ## Installation
 
-Apply the yaml in `bootstrap/` (once), then, with an appropriate context configured ...
+As a highly privileged account:
+
+```sh
+cd bootstrap/
+kubectl apply -f namespace.yaml
+kubectl apply -f ClusterRole.yaml
+kubectl apply -f ClusterRoleBinding.yaml
+```
+
+Deployment then runs via CI, which executes the equivalent of:
 
 ```sh
 export HOSTNAME=<your-url>
@@ -40,3 +49,5 @@ The search bar at the top can be used to filter by name, namespace, and label.
 ## To Do
 
 - [ ] Some smoke tests
+- [ ] Look into OAuth
+- [ ] Dashboard
