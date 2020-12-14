@@ -5,16 +5,16 @@ function deploy() {
 
   _assert_variables_set USERNAME PASSWORD HOSTNAME
 
-  pushd $(dirname $BASH_SOURCE[0]) >/dev/null
+  pushd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null
 
   # when running in CI, we need to set up gcloud/kubeconfig
   if [[ ${DRONE:-} == "true" ]]; then
     _assert_variables_set K8S_DEPLOYER_CREDS K8S_CLUSTER_NAME GCP_PROJECT_ID
     _console_msg "-> Authenticating with GCloud"
     echo "${K8S_DEPLOYER_CREDS}" | gcloud auth activate-service-account --key-file -
-    region=$(gcloud container clusters list --project=${GCP_PROJECT_ID} --filter "NAME=${K8S_CLUSTER_NAME}" --format "value(zone)")
+    region=$(gcloud container clusters list --project="${GCP_PROJECT_ID}" --filter "NAME=${K8S_CLUSTER_NAME}" --format "value(zone)")
     _console_msg "-> Authenticating to cluster ${K8S_CLUSTER_NAME} in project ${GCP_PROJECT_ID} in ${region}"
-    gcloud container clusters get-credentials ${K8S_CLUSTER_NAME} --project=${GCP_PROJECT_ID} --region=${region}
+    gcloud container clusters get-credentials "${K8S_CLUSTER_NAME}" --project="${GCP_PROJECT_ID}" --region="${region}"
   fi
 
   popd >/dev/null
@@ -22,7 +22,7 @@ function deploy() {
   pushd "k8s/" >/dev/null
 
   _console_msg "Creating username/password"
-  htpasswd -bc ./auth ${USERNAME} ${PASSWORD}
+  htpasswd -bc ./auth "${USERNAME}" "${PASSWORD}"
 
   _console_msg "Applying Kubernetes yaml"
   kustomize build . | envsubst | kubectl apply -f -
