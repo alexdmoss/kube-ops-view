@@ -19,3 +19,4 @@ resources:
   - redis.yaml
   - service.yaml
   - service-account.yaml
+  - service-monitor.yaml

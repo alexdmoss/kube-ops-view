@@ -1,0 +1,14 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kube-ops-view
+spec:
+  jobLabel: app
+  selector:
+    matchLabels:
+      app: kube-ops
+  endpoints:
+  - interval: 30s
+    path: /stats/prometheus
+    port: istio-proxy
