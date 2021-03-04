@@ -25,6 +25,7 @@ function deploy() {
   htpasswd -bc ./auth "${USERNAME}" "${PASSWORD}"
 
   _console_msg "Applying Kubernetes yaml"
+  kubectl apply -f namespace.yaml
   kustomize build . | envsubst | kubectl apply -f -
   kubectl rollout status deploy/kube-ops-view -n=ops-view
   
