@@ -6,6 +6,13 @@ I really like the nice and simple visualisation of what's going on with pods / n
 
 ---
 
+## To Do
+
+- [ ] Remove need for envsubst
+- [ ] Smoke tests
+
+---
+
 ## Configuration
 
 The .yaml files are adjusted from [the originals here](https://github.com/hjacobs/kube-ops-view/tree/master/deploy) with `kustomize` to enable CI, and the following tweaks:

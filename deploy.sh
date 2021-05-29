@@ -3,7 +3,7 @@ set -euo pipefail
 
 function deploy() {
 
-  _assert_variables_set USERNAME PASSWORD
+  _assert_variables_set USERNAME PASSWORD HOSTNAME
 
   pushd "$(dirname "${BASH_SOURCE[0]}")/k8s" >/dev/null
 
