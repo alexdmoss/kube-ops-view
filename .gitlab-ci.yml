@@ -5,7 +5,7 @@ stages:
 variables:
   USERNAME: "${KOV_USERNAME}"
   PASSWORD: "${KOV_PASSWORD}"
-  HOSTNAME: "${HOV_HOSTNAME}"
+  HOSTNAME: "${KOV_HOSTNAME}"
 
 
 deploy:
