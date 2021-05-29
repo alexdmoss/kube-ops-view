@@ -15,4 +15,5 @@ deploy:
   - region=$(gcloud container clusters list --project=${GCP_PROJECT_ID} --filter "NAME=${CLUSTER_NAME}" --format "value(zone)")
   - gcloud container clusters get-credentials ${CLUSTER_NAME} --project=${GCP_PROJECT_ID} --region=${region}
   script:
+    - apt-get update && apt-get install -y apache2-utils
     - ./deploy.sh
