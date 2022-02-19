@@ -8,9 +8,10 @@ metadata:
 spec:
   selector:
     service: kube-ops-view
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 80
+      name: http
       protocol: TCP
       targetPort: 8080
 ---
@@ -23,9 +24,10 @@ metadata:
 spec:
   selector:
     service: redis
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 6379
+      name: redis
       protocol: TCP
       targetPort: 6379
 ---
