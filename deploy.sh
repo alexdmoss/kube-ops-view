@@ -7,6 +7,13 @@ function deploy() {
 
   pushd "$(dirname "${BASH_SOURCE[0]}")/k8s" >/dev/null
 
+  _console_msg "Applying RBAC"
+  kubectl apply -f bootstrap/
+
+  popd >/dev/null
+
+  pushd "$(dirname "${BASH_SOURCE[0]}")/k8s" >/dev/null
+
   _console_msg "Creating username/password"
   htpasswd -bc ./auth "${USERNAME}" "${PASSWORD}"
 
