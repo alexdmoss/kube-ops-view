@@ -36,11 +36,10 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              cpu: 200m
-              memory: 200Mi
-            requests:
               cpu: 50m
-              memory: 200Mi
+            requests:
+              cpu: 10m
+              memory: 100Mi
           securityContext:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
