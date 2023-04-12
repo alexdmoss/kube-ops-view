@@ -15,7 +15,6 @@ resources:
   - configmap.yaml
   - deployment.yaml
   - ingress.yaml
-  - pdb.yaml
   - redis.yaml
   - service.yaml
   - service-account.yaml
