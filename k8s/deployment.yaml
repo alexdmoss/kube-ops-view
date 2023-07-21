@@ -36,6 +36,7 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
+              memory: 100Mi
               cpu: 50m
             requests:
               cpu: 10m
@@ -44,3 +45,4 @@ spec:
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
+            readOnlyRootFilesystem: true
