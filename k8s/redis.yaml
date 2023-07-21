@@ -48,6 +48,7 @@ spec:
             runAsNonRoot: true
             # we need to use the "redis" uid
             runAsUser: 100
+            allowPrivilegeEscalation: false
       volumes:
         - name: data
           emptyDir: {}
