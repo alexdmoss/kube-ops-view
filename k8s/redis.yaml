@@ -49,6 +49,9 @@ spec:
             # we need to use the "redis" uid
             runAsUser: 100
             allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
       volumes:
         - name: data
           emptyDir: {}
