@@ -33,11 +33,11 @@ spec:
               port: 6379
           resources:
             limits:
-              cpu: 100m
-              memory: 50Mi
-            requests:
               cpu: 50m
               memory: 50Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
           volumeMounts:
             - mountPath: /redis-master-data
               name: data
