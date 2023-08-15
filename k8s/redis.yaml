@@ -61,3 +61,10 @@ spec:
             items:
               - key: redis-config
                 path: redis.conf
+      nodeSelector:
+        cloud.google.com/gke-spot: "true"
+      tolerations:
+      - effect: NoSchedule
+        key: cloud.google.com/gke-spot
+        operator: Equal
+        value: "true"
