@@ -1,28 +1,35 @@
+# nginx.ingress.kubernetes.io/auth-type: basic
+# nginx.ingress.kubernetes.io/auth-secret: basic-auth
+# nginx.ingress.kubernetes.io/auth-realm: "Authentication Required!"
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+kind: HTTPRoute
+apiVersion: gateway.networking.k8s.io/v1beta1
 metadata:
   name: kube-ops-view
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: basic-auth
-    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required!"
 spec:
-  tls:
-    - secretName: kube-ops-view-tls
-      hosts:
-        - ${HOSTNAME}
+  parentRefs:
+  - kind: Gateway
+    name: shared-gateway
+    namespace: ingress
+  hostnames:
+  - ops-view.alexos.dev
   rules:
-    - host: ${HOSTNAME}
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: kube-ops-view
-                port:
-                  name: http
+  - backendRefs:
+    - name: kube-ops-view
+      port: 8080
+---
+apiVersion: networking.gke.io/v1
+kind: GCPBackendPolicy
+metadata:
+  name: ops-view-iap
+spec:
+  default:
+    iap:
+      enabled: true
+      oauth2ClientSecret:
+        name: iap-client
+      clientID: 482562318875-7aq6p0rf7vms5saau0q2u3tm2uvfksdo.apps.googleusercontent.com
+  targetRef:
+    group: ""
+    kind: Service
+    name: kube-ops-view
