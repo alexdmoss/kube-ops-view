@@ -16,7 +16,7 @@ spec:
   rules:
   - backendRefs:
     - name: kube-ops-view
-      port: 8080
+      port: 80
 ---
 apiVersion: networking.gke.io/v1
 kind: GCPBackendPolicy
