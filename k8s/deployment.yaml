@@ -22,8 +22,7 @@ spec:
       priorityClassName: high-priority
       containers:
         - name: service
-          # see https://github.com/hjacobs/kube-ops-view/releases
-          image: hjacobs/kube-ops-view:0.11
+          image: hjacobs/kube-ops-view:23.5.0
           args:
             # remove this option to use built-in memory store
             - --redis-url=redis://redis:6379
