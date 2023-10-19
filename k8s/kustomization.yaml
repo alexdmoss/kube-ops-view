@@ -6,15 +6,10 @@ namespace: ops-view
 commonLabels:
   app: kube-ops
 
-secretGenerator:
-  - name: basic-auth
-    files:
-      - auth
-
 resources:
   - configmap.yaml
   - deployment.yaml
   - ingress.yaml
+  - rbac.yaml
   - redis.yaml
   - service.yaml
-  - service-account.yaml
