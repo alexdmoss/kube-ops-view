@@ -6,14 +6,6 @@ I really like the nice and simple visualisation of what's going on with pods / n
 
 ---
 
-## To Do
-
-- [ ] Convert to using IAP with Gateway
-- [ ] Clean up yaml / bootstrap
-- [ ] Remove need for envsubst
-
----
-
 ## Configuration
 
 The .yaml files are adjusted from [the originals here](https://github.com/hjacobs/kube-ops-view/tree/master/deploy) with `kustomize` to enable CI.
